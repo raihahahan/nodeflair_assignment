@@ -1,7 +1,7 @@
-import { Anchor, Navbar } from "@mantine/core";
+import { Anchor, AppShell, Navbar } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 import { Burger, Header, MediaQuery } from "@mantine/core";
 import React from "react";
 import useTheme from "../theme/theme-hooks";
@@ -10,6 +10,47 @@ import anchorData, { footerData } from "./site-data";
 // import { anchorTitles, routes } from "./site-types";
 import ToggleThemeButton from "../theme/theme-components";
 import { useGlobalMediaQuery } from "../theme/theme-hooks";
+
+export function SiteLayout({ children }: { children: React.ReactElement }) {
+  const [opened, setOpened] = useState(false);
+  const { siteColors, colorTheme } = useTheme();
+
+  return (
+    <>
+      <AppShell
+        styles={{
+          main: {
+            borderWidth: 0,
+          },
+        }}
+        style={{
+          backgroundColor: siteColors.background,
+        }}
+        navbarOffsetBreakpoint="sm"
+        asideOffsetBreakpoint="sm"
+        padding={17}
+        fixed
+        navbar={<MyNavbar openControl={{ opened, setOpened }} />}
+        header={<MainHeader openControl={{ opened, setOpened }} />}
+        footer={<MyFooter />}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+            marginBottom: 0,
+            color: siteColors.text.primary,
+            overflow: "hidden",
+          }}
+        >
+          {children}
+        </div>
+      </AppShell>
+    </>
+  );
+}
 
 export function MyNavbar({
   openControl,
@@ -147,7 +188,10 @@ export default function MainHeader({
     <Header
       height={70}
       p="md"
-      style={{ borderWidth: 0, backgroundColor: siteColors.header }}
+      style={{
+        borderWidth: 0,
+        backgroundColor: siteColors.header,
+      }}
     >
       <div
         style={{

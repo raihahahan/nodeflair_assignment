@@ -1,10 +1,11 @@
-import { ReduxProvider } from '@/redux/store';
-import '@/styles/globals.css'
-import { MantineProvider } from '@mantine/core';
-import type { AppProps } from 'next/app'
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { SiteLayout } from "@/features/site/site-components";
+import { ReduxProvider } from "@/redux/store";
+import "@/styles/globals.css";
+import { MantineProvider } from "@mantine/core";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const route = useRouter();
@@ -28,9 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
       >
         <ReduxProvider>
-          {/* <SiteLayout> */}
+          <SiteLayout>
             <Component {...pageProps} />
-          {/* </SiteLayout> */}
+          </SiteLayout>
         </ReduxProvider>
       </MantineProvider>
     </>

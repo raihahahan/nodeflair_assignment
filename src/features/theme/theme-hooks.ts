@@ -25,7 +25,7 @@ export default function useTheme() {
 
   const { classes } = stylesFunc();
   const colors = siteColors(theme);
-  const myColorTheme = colorTheme[theme];
+  const myColorTheme = colorTheme["light"];
 
   return {
     siteColors: colors,
