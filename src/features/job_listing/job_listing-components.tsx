@@ -3,8 +3,11 @@ import {
   Anchor,
   Button,
   Card,
+  Code,
   DefaultMantineColor,
   Divider,
+  Grid,
+  ScrollArea,
   StarIcon,
   Text,
   Variants,
@@ -13,13 +16,20 @@ import { CARD_BORDER_RADIUS } from "../theme/theme-data";
 import useTheme from "../theme/theme-hooks";
 import { colorThemeType } from "../theme/theme-types";
 import { JobDetails, JobDetailsSummary } from "./job_listing-types";
-import { useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { formatSalaryRange, timeAgo } from "./job_listing-utils";
 import { FiMap, FiMapPin, FiStar } from "react-icons/fi";
 import Image from "next/image";
 import styles from "./job_listing.module.css";
 import { fakeJobData } from "./job_listing-data";
 import { IconDoorEnter, IconShare } from "@tabler/icons-react";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { remark } from "remark";
+import html from "remark-html";
+import { marked } from "marked";
+import remarkBreaks from "remark-breaks";
 
 export function JobCard({
   jobDetails,
@@ -174,19 +184,19 @@ export function JobCard({
       <Divider my="sm" />
       <div style={{ display: "flex", flexDirection: "row" }}>
         {jobDetails.techStacks.map((i) => {
-          return <TechStackCard colorTheme={colorTheme} stack={i} />;
+          return <GreyCard colorTheme={colorTheme} title={i} />;
         })}
       </div>
     </Card>
   );
 }
 
-export function TechStackCard({
+export function GreyCard({
   colorTheme,
-  stack,
+  title,
 }: {
   colorTheme: colorThemeType;
-  stack: string;
+  title: string;
 }) {
   return (
     <Card
@@ -196,9 +206,9 @@ export function TechStackCard({
         marginLeft: 7,
       }}
     >
-      <Text color={colorTheme.on.on_placeholder} style={{ fontWeight: "bold" }}>
-        {stack}
-      </Text>
+      <Code color={"grey"} style={{ fontWeight: "bold", fontSize: 14 }}>
+        {title}
+      </Code>
     </Card>
   );
 }
@@ -220,7 +230,6 @@ export function JobDetailsCard({
         style={{
           padding: 17,
           width: 660,
-          height: 793,
           backgroundColor: colorTheme.surface,
           marginBottom: 6,
           margin: 10,
@@ -345,7 +354,176 @@ export function JobDetailsCard({
           style={{ marginTop: 14, marginLeft: -17, marginRight: -17 }}
         />
         {/* SECTION */}
+        <MetaDataSection jobDetails={jobDetails} colorTheme={colorTheme} />
+
+        <Divider
+          my="sm"
+          style={{ marginTop: 30, marginLeft: -17, marginRight: -17 }}
+        />
+
+        {/* SECTION */}
+        <DescriptionSection jobDetails={jobDetails} />
+
+        <JobButton
+          text="Search Similar Jobs"
+          color="green"
+          variant="light"
+          onClick={() => null}
+          style={{ width: "100%", marginTop: 20, marginBottom: 20 }}
+        />
       </Card>
+    </div>
+  );
+}
+
+export function DescriptionSection({ jobDetails }: { jobDetails: JobDetails }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        flexDirection: "column",
+      }}
+    >
+      <h3 style={{ fontWeight: "bold" }}>Job Description</h3>
+      <div style={{ marginTop: 30 }}></div>
+      <div style={{ padding: 7 }}>
+        <ReactMarkdown
+          remarkPlugins={[remarkBreaks]}
+          rehypePlugins={[rehypeRaw as any]}
+        >
+          {jobDetails.jobDescription.replace(/\n/gi, "&nbsp; \n")}
+        </ReactMarkdown>
+      </div>
+    </div>
+  );
+}
+
+export function ExtraDataCard({
+  colorTheme,
+  jobDetails,
+}: {
+  colorTheme: colorThemeType;
+  jobDetails: JobDetails | null;
+}) {
+  if (jobDetails == null) {
+    return <div>An error occurred.</div>;
+  }
+  return (
+    <Card
+      style={{
+        padding: 17,
+        width: 660,
+        backgroundColor: colorTheme.surface,
+        marginBottom: 6,
+        margin: 10,
+        borderWidth: 3.5,
+        borderRadius: CARD_BORDER_RADIUS,
+      }}
+      color={colorTheme.surface}
+    >
+      <Text
+        style={{ fontWeight: "bolder", marginBottom: 10, fontSize: 17 }}
+      >{`Salaries of ${jobDetails.similarJobType} at ${jobDetails.company.name}`}</Text>
+      <Text style={{ color: "#878787", fontWeight: "300", marginBottom: 10 }}>
+        {jobDetails.salaryRange?.similarJobSalary
+          ? `Salaries from ${jobDetails.company.name} that are similar to ${jobDetails.jobTitle}`
+          : `There are salaries from ${jobDetails.company.name} that are similar to ${jobDetails.similarJobType}`}
+      </Text>
+      {jobDetails.salaryRange?.similarJobSalary && (
+        <Text style={{ fontWeight: "bolder", marginBottom: 10, fontSize: 17 }}>
+          {formatSalaryRange(jobDetails.salaryRange.similarJobSalary)}
+        </Text>
+      )}
+      {jobDetails.salaryRange?.isEstimate && (
+        <Text style={{ color: "#878787", fontWeight: "300", marginBottom: 30 }}>
+          Estimated Salary
+        </Text>
+      )}
+
+      <Anchor
+        href="#"
+        color="green"
+        style={{ textDecoration: "none" }}
+      >{`View more salaries from ${jobDetails.company.name} →`}</Anchor>
+    </Card>
+  );
+}
+
+export function MetaDataSection({
+  jobDetails,
+  colorTheme,
+}: {
+  jobDetails: JobDetails;
+  colorTheme: colorThemeType;
+}) {
+  return (
+    <Grid justify="space-between" gutter="xl">
+      {jobDetails.salaryRange && (
+        <Grid.Col span={6}>
+          <MetaDataItem
+            title={"Salary"}
+            contents={<Text>{formatSalaryRange(jobDetails.salaryRange)}</Text>}
+          />
+        </Grid.Col>
+      )}
+      <Grid.Col span={6}>
+        <MetaDataItem
+          title={"Job Type"}
+          contents={<Text>{jobDetails.jobType ?? "-"}</Text>}
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <MetaDataItem
+          title={"Seniority"}
+          contents=<Grid style={{ marginTop: 1 }}>
+            {jobDetails.seniority.map((i) => {
+              return <GreyCard colorTheme={colorTheme} title={i} />;
+            })}
+          </Grid>
+        />
+      </Grid.Col>
+
+      <Grid.Col span={6}>
+        <MetaDataItem
+          title={"Years of Experience"}
+          contents={<Text>{jobDetails.yoe}</Text>}
+        />
+      </Grid.Col>
+
+      <Grid.Col span={12}>
+        <MetaDataItem
+          title={"Tech Stacks"}
+          contents={
+            <Grid style={{ marginTop: 1 }}>
+              {jobDetails.techStacks.map((i) => {
+                return <GreyCard colorTheme={colorTheme} title={i} />;
+              })}
+            </Grid>
+          }
+        />
+      </Grid.Col>
+    </Grid>
+  );
+}
+
+export function MetaDataItem({
+  title,
+  contents,
+}: {
+  title: string;
+  contents: React.ReactElement;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: 300,
+        flexDirection: "column",
+      }}
+    >
+      <Text style={{ fontWeight: "bold" }}>{title}</Text>
+      {contents}
     </div>
   );
 }
@@ -390,6 +568,7 @@ export function JobButton({
   icon,
   color,
   variant,
+  style,
 }: {
   text?: string;
   onClick: () => void;
@@ -398,6 +577,7 @@ export function JobButton({
   variant?: Variants<
     "light" | "outline" | "default" | "white" | "gradient" | "filled" | "subtle"
   >;
+  style?: CSSProperties;
 }) {
   return (
     <Button
@@ -406,6 +586,7 @@ export function JobButton({
         borderRadius: CARD_BORDER_RADIUS,
         borderWidth: 2,
         marginRight: 12,
+        ...style,
       }}
       color={color}
       variant={variant}
@@ -430,6 +611,7 @@ export function JobListings({
   const [fullJobDetails, setFullJobDetails] = useState<JobDetails | null>(
     fakeJobData[0]
   );
+
   return (
     <div
       style={{
@@ -437,7 +619,15 @@ export function JobListings({
         flexDirection: "row",
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          flexDirection: "column",
+          maxHeight: "100vh",
+          overflowY: "scroll",
+          width: "100vw",
+          paddingLeft: 120,
+        }}
+      >
         {jobListings.map((i) => {
           i.datePosted = new Date(i.datePosted);
           return (
@@ -460,7 +650,20 @@ export function JobListings({
           );
         })}
       </div>
-      <JobDetailsCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+
+      <ScrollArea
+        h={793}
+        offsetScrollbars
+        scrollbarSize={12}
+        scrollHideDelay={0}
+        type="always"
+        style={{ overflowY: "hidden", position: "absolute", left: 550 }}
+      >
+        <div>
+          <JobDetailsCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+          <ExtraDataCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+        </div>
+      </ScrollArea>
     </div>
   );
 }

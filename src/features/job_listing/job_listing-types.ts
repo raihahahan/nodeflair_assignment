@@ -16,9 +16,10 @@ export interface JobDetailsSummary {
 }
 
 export interface JobDetails extends JobDetailsSummary {
-  seniority: string;
+  seniority: string[];
   yoe: string;
   jobDescription: string; // format in Markdown
+  similarJobType: string;
 }
 
 export interface salaryRange {
@@ -26,6 +27,7 @@ export interface salaryRange {
   min: number;
   max: number;
   isEstimate: boolean;
+  similarJobSalary?: salaryRange
 }
 
 export interface JobDetailsSalarySummary {
