@@ -1,11 +1,14 @@
-import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { JobListings } from "@/features/job_listing/job_listing-components";
 import { JobDetailsSummary } from "@/features/job_listing/job_listing-types";
-import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import type {
+  InferGetServerSidePropsType,
+  GetServerSideProps,
+  GetStaticProps,
+} from "next";
 import { fakeJobData } from "@/features/job_listing/job_listing-data";
+import useTheme from "@/features/theme/theme-hooks";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +17,15 @@ export default function Home({
 }: {
   jobListingsSummary: JobDetailsSummary[];
 }) {
-  return <JobListings jobListings={jobListingsSummary} />;
+  const { colorTheme } = useTheme();
+  return (
+    <div style={{ backgroundColor: colorTheme.background, padding: 20 }}>
+      <JobListings jobListings={jobListingsSummary} />
+    </div>
+  );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const data = JSON.parse(JSON.stringify(fakeJobData));
   return { props: { jobListingsSummary: data } };
 };

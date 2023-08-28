@@ -39,10 +39,13 @@ export function GreyCard({
       style={{
         backgroundColor: colorTheme.placeholder,
         padding: 7,
-        marginLeft: 7,
+        margin: 7,
       }}
     >
-      <Code color={"grey"} style={{ fontWeight: "bold", fontSize: 14 }}>
+      <Code
+        color={"grey"}
+        style={{ fontWeight: "bold", fontSize: 14, textAlign: "center" }}
+      >
         {title}
       </Code>
     </Card>
