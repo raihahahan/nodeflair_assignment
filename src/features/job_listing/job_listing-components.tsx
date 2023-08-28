@@ -668,7 +668,7 @@ export function RightComponent({
 }) {
   return (
     <ScrollArea
-      h={793}
+      h={"100vh"}
       offsetScrollbars
       scrollbarSize={12}
       scrollHideDelay={0}
