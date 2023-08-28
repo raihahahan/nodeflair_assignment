@@ -76,11 +76,9 @@ export function JobCard({
         backgroundColor: colorTheme.surface,
         marginBottom: 6,
         margin: 10,
-        borderWidth: 3.5,
+        borderWidth: selectedJob.id == jobDetails.id ? 3.5 : 0.2,
         borderColor:
-          selectedJob.id == jobDetails.id
-            ? colorTheme.primary.main
-            : colorTheme.surface,
+          selectedJob.id == jobDetails.id ? colorTheme.primary.main : "#e1e0dd",
       }}
       radius={CARD_BORDER_RADIUS}
     >
@@ -235,7 +233,6 @@ export function JobDetailsCard({
           backgroundColor: colorTheme.surface,
           marginBottom: 6,
           margin: 10,
-          borderWidth: 3.5,
           borderRadius: CARD_BORDER_RADIUS,
         }}
         color={colorTheme.surface}
