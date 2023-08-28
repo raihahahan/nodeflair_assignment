@@ -204,7 +204,7 @@ export function JobCard({
       <Divider my="sm" />
       <div style={{ display: "flex", flexDirection: "row" }}>
         {jobDetails.techStacks.map((i) => {
-          return <GreyCard colorTheme={colorTheme} title={i} />;
+          return <GreyCard key={i} colorTheme={colorTheme} title={i} />;
         })}
       </div>
     </Card>
@@ -477,7 +477,7 @@ export function MetaDataSection({
           title={"Seniority"}
           contents=<Grid style={{ marginTop: 1 }}>
             {jobDetails.seniority.map((i) => {
-              return <GreyCard colorTheme={colorTheme} title={i} />;
+              return <GreyCard key={i} colorTheme={colorTheme} title={i} />;
             })}
           </Grid>
         />
@@ -496,7 +496,7 @@ export function MetaDataSection({
           contents={
             <Grid style={{ marginTop: 1 }}>
               {jobDetails.techStacks.map((i) => {
-                return <GreyCard colorTheme={colorTheme} title={i} />;
+                return <GreyCard key={i} colorTheme={colorTheme} title={i} />;
               })}
             </Grid>
           }
@@ -724,7 +724,7 @@ export function LeftComponent({
       >
         {jobListings.map((i) => {
           i.datePosted = new Date(i.datePosted);
-          return <CommonComponent i={i} />;
+          return <CommonComponent key={i.id} i={i} />;
         })}
       </div>
     );
@@ -738,7 +738,7 @@ export function LeftComponent({
       <ScrollArea h={793} type="never">
         {jobListings.map((i) => {
           i.datePosted = new Date(i.datePosted);
-          return <CommonComponent i={i} />;
+          return <CommonComponent key={i.id} i={i} />;
         })}
       </ScrollArea>
     </div>
