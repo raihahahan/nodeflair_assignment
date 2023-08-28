@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const route = useRouter();
-  const [siteTitle, setSiteTitle] = useState("Nodeflair | Jobs");
+  const [siteTitle, setSiteTitle] = useState("Nodeflair Jobs");
 
   return (
     <>

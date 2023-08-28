@@ -626,11 +626,13 @@ export function MetaDataSection({
       <Grid.Col span={6}>
         <MetaDataItem
           title={"Seniority"}
-          contents=<Grid style={{ marginTop: 1 }}>
-            {jobDetails.seniority.map((i) => {
-              return <GreyCard key={i} colorTheme={colorTheme} title={i} />;
-            })}
-          </Grid>
+          contents={
+            <Grid style={{ marginTop: 1 }}>
+              {jobDetails.seniority.map((i) => {
+                return <GreyCard key={i} colorTheme={colorTheme} title={i} />;
+              })}
+            </Grid>
+          }
         />
       </Grid.Col>
 
