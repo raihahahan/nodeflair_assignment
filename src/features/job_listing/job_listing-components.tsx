@@ -640,9 +640,10 @@ export function JobListings({
     <div
       style={{
         backgroundColor: colorTheme.background,
-        paddingTop: 20,
+        paddingTop: 0,
         display: "flex",
         justifyContent: "center",
+        height: "100vh",
       }}
     >
       <LeftComponent
@@ -735,7 +736,7 @@ export function LeftComponent({
         flexDirection: "column",
       }}
     >
-      <ScrollArea h={793} type="never">
+      <ScrollArea h={"100vh"} type="never">
         {jobListings.map((i) => {
           i.datePosted = new Date(i.datePosted);
           return <CommonComponent key={i.id} i={i} />;
