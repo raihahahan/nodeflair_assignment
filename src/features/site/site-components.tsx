@@ -135,6 +135,7 @@ export function CustomAnchor({
 export function MyFooter({ extraStyles }: { extraStyles?: CSSProperties }) {
   const { siteColors: colors } = useTheme();
   const { sm } = useGlobalMediaQuery();
+
   return (
     <section
       id="FOOTER"
