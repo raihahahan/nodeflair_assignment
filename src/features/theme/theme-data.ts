@@ -8,7 +8,7 @@ import {
 export const breakpoints: breakpointsTypes = {
   xs: 500,
   sm: 850,
-  md: 1000,
+  md: 1120,
   lg: 1275,
   xl: 1800,
 };

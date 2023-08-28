@@ -8,39 +8,61 @@ import {
   Divider,
   Grid,
   ScrollArea,
-  StarIcon,
   Text,
   Variants,
 } from "@mantine/core";
 import { CARD_BORDER_RADIUS } from "../theme/theme-data";
-import useTheme from "../theme/theme-hooks";
+import useTheme, { useGlobalMediaQuery } from "../theme/theme-hooks";
 import { colorThemeType } from "../theme/theme-types";
 import { JobDetails, JobDetailsSummary } from "./job_listing-types";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { formatSalaryRange, timeAgo } from "./job_listing-utils";
-import { FiMap, FiMapPin, FiStar } from "react-icons/fi";
+import { FiMapPin, FiStar } from "react-icons/fi";
 import Image from "next/image";
 import styles from "./job_listing.module.css";
 import { fakeJobData } from "./job_listing-data";
 import { IconDoorEnter, IconShare } from "@tabler/icons-react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
-import { remark } from "remark";
-import html from "remark-html";
-import { marked } from "marked";
 import remarkBreaks from "remark-breaks";
 
+//#region common
+export function GreyCard({
+  colorTheme,
+  title,
+}: {
+  colorTheme: colorThemeType;
+  title: string;
+}) {
+  return (
+    <Card
+      style={{
+        backgroundColor: colorTheme.placeholder,
+        padding: 7,
+        marginLeft: 7,
+      }}
+    >
+      <Code color={"grey"} style={{ fontWeight: "bold", fontSize: 14 }}>
+        {title}
+      </Code>
+    </Card>
+  );
+}
+//#endregion
+
+//#region LHS
 export function JobCard({
   jobDetails,
   colorTheme,
   onClickCard,
   selectedJob,
+  isSmall,
 }: {
   jobDetails: JobDetailsSummary;
   colorTheme: colorThemeType;
   onClickCard: (j: JobDetailsSummary) => void;
   selectedJob: JobDetailsSummary;
+  isSmall?: boolean;
 }) {
   return (
     <Card
@@ -50,7 +72,7 @@ export function JobCard({
       style={{
         cursor: "pointer",
         padding: 17,
-        width: 417,
+        width: isSmall ? "80vw" : 417,
         backgroundColor: colorTheme.surface,
         marginBottom: 6,
         margin: 10,
@@ -70,7 +92,7 @@ export function JobCard({
       >
         <Image
           alt={`${jobDetails.company.name} logo`}
-          src={`/images/mockData/job_${jobDetails.id}.png`}
+          src={jobDetails.company.imgURL}
           width={45}
           height={45}
           style={{ marginRight: 10 }}
@@ -190,29 +212,9 @@ export function JobCard({
     </Card>
   );
 }
+//#endregion
 
-export function GreyCard({
-  colorTheme,
-  title,
-}: {
-  colorTheme: colorThemeType;
-  title: string;
-}) {
-  return (
-    <Card
-      style={{
-        backgroundColor: colorTheme.placeholder,
-        padding: 7,
-        marginLeft: 7,
-      }}
-    >
-      <Code color={"grey"} style={{ fontWeight: "bold", fontSize: 14 }}>
-        {title}
-      </Code>
-    </Card>
-  );
-}
-
+//#region RHS Components
 export function JobDetailsCard({
   colorTheme,
   jobDetails,
@@ -599,6 +601,9 @@ export function JobButton({
   );
 }
 
+//#endregion
+
+//#region MAIN
 export function JobListings({
   jobListings,
 }: {
@@ -611,59 +616,136 @@ export function JobListings({
   const [fullJobDetails, setFullJobDetails] = useState<JobDetails | null>(
     fakeJobData[0]
   );
+  const b = useGlobalMediaQuery();
+  if (b.md) {
+    return (
+      <div
+        style={{
+          backgroundColor: colorTheme.background,
+          paddingTop: 20,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <LeftComponent
+          isSmall={b.md}
+          colorTheme={colorTheme}
+          jobListings={jobListings}
+          selectedJob={selectedJob}
+          setSelectedJob={setSelectedJob}
+          setFullJobDetails={setFullJobDetails}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
       style={{
+        backgroundColor: colorTheme.background,
+        paddingTop: 20,
         display: "flex",
-        flexDirection: "row",
+        justifyContent: "center",
       }}
     >
+      <LeftComponent
+        colorTheme={colorTheme}
+        jobListings={jobListings}
+        selectedJob={selectedJob}
+        setSelectedJob={setSelectedJob}
+        setFullJobDetails={setFullJobDetails}
+      />
+
+      <RightComponent colorTheme={colorTheme} fullJobDetails={fullJobDetails} />
+    </div>
+  );
+}
+
+export function RightComponent({
+  colorTheme,
+  fullJobDetails,
+}: {
+  colorTheme: colorThemeType;
+  fullJobDetails: JobDetails | null;
+}) {
+  return (
+    <ScrollArea
+      h={793}
+      offsetScrollbars
+      scrollbarSize={12}
+      scrollHideDelay={0}
+      type="always"
+      style={{ overflow: "hidden" }}
+    >
+      <div style={{ width: "auto" }}>
+        <JobDetailsCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+        <ExtraDataCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+      </div>
+    </ScrollArea>
+  );
+}
+
+export function LeftComponent({
+  colorTheme,
+  jobListings,
+  selectedJob,
+  setSelectedJob,
+  setFullJobDetails,
+  isSmall,
+}: {
+  colorTheme: colorThemeType;
+  jobListings: JobDetailsSummary[];
+  selectedJob: JobDetailsSummary;
+  setSelectedJob: React.Dispatch<React.SetStateAction<JobDetailsSummary>>;
+  setFullJobDetails: React.Dispatch<React.SetStateAction<JobDetails | null>>;
+  isSmall?: boolean;
+}) {
+  const CommonComponent = ({ i }: { i: JobDetailsSummary }) => (
+    <JobCard
+      isSmall={isSmall}
+      jobDetails={i}
+      colorTheme={colorTheme}
+      selectedJob={selectedJob}
+      onClickCard={(j: JobDetailsSummary) => {
+        setSelectedJob(j);
+        const _fullJobDetailsQuery = fakeJobData.filter((i) => i.id == j.id);
+        if (_fullJobDetailsQuery.length == 1) {
+          setFullJobDetails(_fullJobDetailsQuery[0]);
+        } else {
+          setFullJobDetails(null);
+        }
+      }}
+    />
+  );
+
+  if (isSmall) {
+    return (
       <div
         style={{
           flexDirection: "column",
-          maxHeight: "100vh",
-          overflowY: "scroll",
-          width: "100vw",
-          paddingLeft: 120,
         }}
       >
         {jobListings.map((i) => {
           i.datePosted = new Date(i.datePosted);
-          return (
-            <JobCard
-              jobDetails={i}
-              colorTheme={colorTheme}
-              selectedJob={selectedJob}
-              onClickCard={(j: JobDetailsSummary) => {
-                setSelectedJob(j);
-                const _fullJobDetailsQuery = fakeJobData.filter(
-                  (i) => i.id == j.id
-                );
-                if (_fullJobDetailsQuery.length == 1) {
-                  setFullJobDetails(_fullJobDetailsQuery[0]);
-                } else {
-                  setFullJobDetails(null);
-                }
-              }}
-            />
-          );
+          return <CommonComponent i={i} />;
         })}
       </div>
-
-      <ScrollArea
-        h={793}
-        offsetScrollbars
-        scrollbarSize={12}
-        scrollHideDelay={0}
-        type="always"
-        style={{ overflowY: "hidden", position: "absolute", left: 550 }}
-      >
-        <div>
-          <JobDetailsCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
-          <ExtraDataCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
-        </div>
+    );
+  }
+  return (
+    <div
+      style={{
+        flexDirection: "column",
+      }}
+    >
+      <ScrollArea h={793} type="never">
+        {jobListings.map((i) => {
+          i.datePosted = new Date(i.datePosted);
+          return <CommonComponent i={i} />;
+        })}
       </ScrollArea>
     </div>
   );
 }
+
+//#endregion

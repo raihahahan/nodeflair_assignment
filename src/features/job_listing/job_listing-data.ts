@@ -6,7 +6,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 1",
       link: "https://www.example.com/company1",
-      imgURL: "images/mockData/job_0.png",
+      imgURL: "/images/mockData/job_0.png",
     },
     jobTitle: "Software Engineer",
     location: "New York, NY",
@@ -37,7 +37,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_1.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -57,7 +57,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_2.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -77,7 +77,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_3.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -97,7 +97,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_4.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -117,7 +117,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_5.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -137,7 +137,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_6.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -157,7 +157,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_7.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -177,7 +177,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_8.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -197,7 +197,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_9.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",
@@ -217,7 +217,7 @@ export const fakeJobData: JobDetails[] = [
     company: {
       name: "Example Company 2",
       link: "https://www.example.com/company2",
-      imgURL: "images/mockData/job_1.png",
+      imgURL: "/images/mockData/job_10.png",
     },
     jobTitle: "Frontend Developer",
     location: "San Francisco, CA",

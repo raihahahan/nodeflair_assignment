@@ -28,13 +28,13 @@ export function SiteLayout({ children }: { children: React.ReactElement }) {
         }}
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
-        padding={17}
+        padding={10}
         fixed
         navbar={<MyNavbar openControl={{ opened, setOpened }} />}
         header={<MainHeader openControl={{ opened, setOpened }} />}
         footer={<MyFooter />}
       >
-        <div
+        {/* <div
           style={{
             display: "flex",
             alignItems: "center",
@@ -44,9 +44,9 @@ export function SiteLayout({ children }: { children: React.ReactElement }) {
             color: siteColors.text.primary,
             overflow: "hidden",
           }}
-        >
-          {children}
-        </div>
+        > */}
+        {children}
+        {/* </div> */}
       </AppShell>
     </>
   );

@@ -1,4 +1,5 @@
 import { SiteLayout } from "@/features/site/site-components";
+import { colorTheme } from "@/features/theme/theme-data";
 import { ReduxProvider } from "@/redux/store";
 import "@/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
@@ -29,9 +30,11 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
       >
         <ReduxProvider>
-          <SiteLayout>
+          {/* <SiteLayout> */}
+          <div style={{ backgroundColor: "white" }}>
             <Component {...pageProps} />
-          </SiteLayout>
+          </div>
+          {/* </SiteLayout> */}
         </ReduxProvider>
       </MantineProvider>
     </>
