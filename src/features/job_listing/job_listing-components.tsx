@@ -185,14 +185,19 @@ export function GreyCard({
   return (
     <Card
       style={{
-        backgroundColor: colorTheme.placeholder,
+        backgroundColor: "#f8f9fa",
         padding: 7,
-        margin: 7,
+        margin: 4,
       }}
     >
       <Code
-        color={"grey"}
-        style={{ fontWeight: "bold", fontSize: 14, textAlign: "center" }}
+        color="gray"
+        style={{
+          fontWeight: "bold",
+          color: "GrayText",
+          fontSize: 14,
+          textAlign: "center",
+        }}
       >
         {title}
       </Code>
@@ -535,7 +540,7 @@ export function DescriptionSection({ jobDetails }: { jobDetails: JobDetails }) {
         flexDirection: "column",
       }}
     >
-      <h3 style={{ fontWeight: "bold" }}>Job Description</h3>
+      <h3 style={{ fontWeight: "bold", fontSize: 16 }}>Job Description</h3>
       <div style={{ marginTop: 30 }}></div>
       <div style={{ padding: 7 }}>
         <ReactMarkdown
@@ -674,7 +679,7 @@ export function MetaDataItem({
         flexDirection: "column",
       }}
     >
-      <Text style={{ fontWeight: "bold" }}>{title}</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 16 }}>{title}</Text>
       {contents}
     </div>
   );

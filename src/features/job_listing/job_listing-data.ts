@@ -54,7 +54,7 @@ export const fakeJobData: JobDetails[] = [
     rating: 4.5,
     seniority: ["Senior"],
     yoe: "5+ years",
-    jobDescription: `# Senior Software Engineer\n\nTechCo is seeking a Senior Software Engineer to join our talented team.\n\n\n## Responsibilities\n\n- Develop high-quality software solutions...\n\n- Collaborate with cross-functional teams...\n\n- Participate in code reviews...\n\n\n## Qualifications\n\n- Bachelor's degree in Computer Science...\n\n- Strong experience with React and Node.js...\n\n- Excellent problem-solving skills...
+    jobDescription: `TechCo is seeking a Senior Software Engineer to join our talented team.\n\n\n## Responsibilities\n\n- Develop high-quality software solutions...\n\n- Collaborate with cross-functional teams...\n\n- Participate in code reviews...\n\n\n## Qualifications\n\n- Bachelor's degree in Computer Science...\n\n- Strong experience with React and Node.js...\n\n- Excellent problem-solving skills...
         `,
     similarJobType: "Software Engineer",
   },
@@ -80,7 +80,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid", "Senior"],
     yoe: "3-7 years",
     jobDescription:
-      "# Data Scientist\n\nJoin our team at CodeCrafters as a Data Scientist and contribute to...\n\nResponsibilities:\n\n- Analyze large datasets to extract meaningful insights...\n- Build and deploy machine learning models...\n- Collaborate with cross-functional teams...\n\nQualifications:\n\n- Master's or Ph.D. in a quantitative field...\n- Proficient in Python, machine learning techniques...\n- Strong problem-solving and analytical skills...",
+      "Join our team at CodeCrafters as a Data Scientist and contribute to...\n\nResponsibilities:\n\n- Analyze large datasets to extract meaningful insights...\n- Build and deploy machine learning models...\n- Collaborate with cross-functional teams...\n\nQualifications:\n\n- Master's or Ph.D. in a quantitative field...\n- Proficient in Python, machine learning techniques...\n- Strong problem-solving and analytical skills...",
     similarJobType: "Machine Learning Engineer",
   },
   {
@@ -136,7 +136,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid"],
     yoe: "3-6 years",
     jobDescription:
-      "# Cybersecurity Analyst\n\nTechInnovators is seeking a Cybersecurity Analyst to ensure the security of our systems...\n\nResponsibilities:\n\n- Monitor and analyze security alerts and incidents...\n- Implement security measures and best practices...\n- Collaborate with IT teams to address vulnerabilities...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in cybersecurity techniques, network security, and SIEM tools...\n- Strong understanding of threat detection and response...",
+      "TechInnovators is seeking a Cybersecurity Analyst to ensure the security of our systems...\n\nResponsibilities:\n\n- Monitor and analyze security alerts and incidents...\n- Implement security measures and best practices...\n- Collaborate with IT teams to address vulnerabilities...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in cybersecurity techniques, network security, and SIEM tools...\n- Strong understanding of threat detection and response...",
     similarJobType: "Security Engineer",
   },
   {
@@ -161,7 +161,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid"],
     yoe: "3-6 years",
     jobDescription:
-      "# Database Administrator\n\nDataTech Solutions is looking for a Database Administrator to manage our data infrastructure...\n\nResponsibilities:\n\n- Design, implement, and maintain databases...\n- Optimize database performance and troubleshoot issues...\n- Collaborate with development teams for data integration...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in database management, SQL, and performance tuning...\n- Strong problem-solving and communication skills...",
+      "DataTech Solutions is looking for a Database Administrator to manage our data infrastructure...\n\nResponsibilities:\n\n- Design, implement, and maintain databases...\n- Optimize database performance and troubleshoot issues...\n- Collaborate with development teams for data integration...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in database management, SQL, and performance tuning...\n- Strong problem-solving and communication skills...",
     similarJobType: "Data Engineer",
   },
   {
@@ -192,7 +192,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid"],
     yoe: "2-5 years",
     jobDescription:
-      "# Frontend Developer\n\nTechSolutions is looking for a Frontend Developer to build user interfaces...\n\nResponsibilities:\n\n- Develop interactive and responsive web applications...\n- Collaborate with designers to implement UI/UX designs...\n- Write clean and modular code using React and JavaScript...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in React, JavaScript, HTML, and CSS...\n- Strong problem-solving and UI development skills...",
+      "TechSolutions is looking for a Frontend Developer to build user interfaces...\n\nResponsibilities:\n\n- Develop interactive and responsive web applications...\n- Collaborate with designers to implement UI/UX designs...\n- Write clean and modular code using React and JavaScript...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in React, JavaScript, HTML, and CSS...\n- Strong problem-solving and UI development skills...",
     similarJobType: "UI Developer",
   },
   {
@@ -223,7 +223,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid"],
     yoe: "2-5 years",
     jobDescription:
-      "# Software QA Engineer\n\nCodeMasters is seeking a Software QA Engineer to ensure the quality of our products...\n\nResponsibilities:\n\n- Develop and execute automated test scripts...\n- Identify and report software defects and issues...\n- Collaborate with development teams to improve product quality...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in quality assurance methodologies, automated testing, and Selenium...\n- Strong problem-solving and attention to detail...",
+      "CodeMasters is seeking a Software QA Engineer to ensure the quality of our products...\n\nResponsibilities:\n\n- Develop and execute automated test scripts...\n- Identify and report software defects and issues...\n- Collaborate with development teams to improve product quality...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in quality assurance methodologies, automated testing, and Selenium...\n- Strong problem-solving and attention to detail...",
     similarJobType: "Test Automation Engineer",
   },
   {
@@ -254,7 +254,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid"],
     yoe: "3-6 years",
     jobDescription:
-      "# Full Stack Developer\n\nTechInnovators is looking for a Full Stack Developer to work on end-to-end solutions...\n\nResponsibilities:\n\n- Develop and maintain both frontend and backend components...\n- Collaborate with teams to design and implement features...\n- Manage databases and server-side logic using Node.js and Express...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in Node.js, Express, React, and MongoDB...\n- Strong problem-solving and full stack development skills...",
+      "TechInnovators is looking for a Full Stack Developer to work on end-to-end solutions...\n\nResponsibilities:\n\n- Develop and maintain both frontend and backend components...\n- Collaborate with teams to design and implement features...\n- Manage databases and server-side logic using Node.js and Express...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in Node.js, Express, React, and MongoDB...\n- Strong problem-solving and full stack development skills...",
     similarJobType: "Web Developer",
   },
   {
@@ -279,7 +279,7 @@ export const fakeJobData: JobDetails[] = [
     seniority: ["Mid", "Senior"],
     yoe: "4-8 years",
     jobDescription:
-      "# DevOps Engineer\n\nTechVision is seeking a DevOps Engineer to streamline our software development and deployment processes...\n\nResponsibilities:\n\n- Design and implement automated deployment pipelines...\n- Manage Docker and Kubernetes clusters for containerization...\n- Collaborate with development teams to ensure smooth integration...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in Docker, Kubernetes, AWS, and CI/CD practices...\n- Strong problem-solving and automation skills...",
+      "TechVision is seeking a DevOps Engineer to streamline our software development and deployment processes...\n\nResponsibilities:\n\n- Design and implement automated deployment pipelines...\n- Manage Docker and Kubernetes clusters for containerization...\n- Collaborate with development teams to ensure smooth integration...\n\nQualifications:\n\n- Bachelor's degree in Computer Science or related field...\n- Proficient in Docker, Kubernetes, AWS, and CI/CD practices...\n- Strong problem-solving and automation skills...",
     similarJobType: "Site Reliability Engineer",
   },
 ];
