@@ -26,6 +26,154 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
 
+//#region MAIN
+export function JobListings({
+  jobListings,
+}: {
+  jobListings: JobDetailsSummary[];
+}) {
+  const { colorTheme } = useTheme();
+  const [selectedJob, setSelectedJob] = useState<JobDetailsSummary>(
+    fakeJobData[0]
+  );
+  const [fullJobDetails, setFullJobDetails] = useState<JobDetails | null>(
+    fakeJobData[0]
+  );
+  const b = useGlobalMediaQuery();
+  if (b.md) {
+    return (
+      <div
+        style={{
+          backgroundColor: colorTheme.background,
+          paddingTop: 20,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <LeftComponent
+          isSmall={b.md}
+          colorTheme={colorTheme}
+          jobListings={jobListings}
+          selectedJob={selectedJob}
+          setSelectedJob={setSelectedJob}
+          setFullJobDetails={setFullJobDetails}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        backgroundColor: colorTheme.background,
+        paddingTop: 0,
+        display: "flex",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
+      <LeftComponent
+        colorTheme={colorTheme}
+        jobListings={jobListings}
+        selectedJob={selectedJob}
+        setSelectedJob={setSelectedJob}
+        setFullJobDetails={setFullJobDetails}
+      />
+
+      <RightComponent colorTheme={colorTheme} fullJobDetails={fullJobDetails} />
+    </div>
+  );
+}
+
+export function RightComponent({
+  colorTheme,
+  fullJobDetails,
+}: {
+  colorTheme: colorThemeType;
+  fullJobDetails: JobDetails | null;
+}) {
+  return (
+    <ScrollArea
+      h={"100vh"}
+      offsetScrollbars
+      scrollbarSize={12}
+      scrollHideDelay={0}
+      type="always"
+      style={{ overflow: "hidden" }}
+    >
+      <div style={{ width: "auto" }}>
+        <JobDetailsCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+        <ExtraDataCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
+      </div>
+    </ScrollArea>
+  );
+}
+
+export function LeftComponent({
+  colorTheme,
+  jobListings,
+  selectedJob,
+  setSelectedJob,
+  setFullJobDetails,
+  isSmall,
+}: {
+  colorTheme: colorThemeType;
+  jobListings: JobDetailsSummary[];
+  selectedJob: JobDetailsSummary;
+  setSelectedJob: React.Dispatch<React.SetStateAction<JobDetailsSummary>>;
+  setFullJobDetails: React.Dispatch<React.SetStateAction<JobDetails | null>>;
+  isSmall?: boolean;
+}) {
+  const CommonComponent = ({ i }: { i: JobDetailsSummary }) => (
+    <JobCard
+      isSmall={isSmall}
+      jobDetails={i}
+      colorTheme={colorTheme}
+      selectedJob={selectedJob}
+      onClickCard={(j: JobDetailsSummary) => {
+        setSelectedJob(j);
+        const _fullJobDetailsQuery = fakeJobData.filter((i) => i.id == j.id);
+        if (_fullJobDetailsQuery.length == 1) {
+          setFullJobDetails(_fullJobDetailsQuery[0]);
+        } else {
+          setFullJobDetails(null);
+        }
+      }}
+    />
+  );
+
+  if (isSmall) {
+    return (
+      <div
+        style={{
+          flexDirection: "column",
+        }}
+      >
+        {jobListings.map((i) => {
+          i.datePosted = new Date(i.datePosted);
+          return <CommonComponent key={i.id} i={i} />;
+        })}
+      </div>
+    );
+  }
+  return (
+    <div
+      style={{
+        flexDirection: "column",
+      }}
+    >
+      <ScrollArea h={"100vh"} type="never">
+        {jobListings.map((i) => {
+          i.datePosted = new Date(i.datePosted);
+          return <CommonComponent key={i.id} i={i} />;
+        })}
+      </ScrollArea>
+    </div>
+  );
+}
+
+//#endregion
+
 //#region common
 export function GreyCard({
   colorTheme,
@@ -598,154 +746,6 @@ export function JobButton({
     >
       {text}
     </Button>
-  );
-}
-
-//#endregion
-
-//#region MAIN
-export function JobListings({
-  jobListings,
-}: {
-  jobListings: JobDetailsSummary[];
-}) {
-  const { colorTheme } = useTheme();
-  const [selectedJob, setSelectedJob] = useState<JobDetailsSummary>(
-    fakeJobData[0]
-  );
-  const [fullJobDetails, setFullJobDetails] = useState<JobDetails | null>(
-    fakeJobData[0]
-  );
-  const b = useGlobalMediaQuery();
-  if (b.md) {
-    return (
-      <div
-        style={{
-          backgroundColor: colorTheme.background,
-          paddingTop: 20,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <LeftComponent
-          isSmall={b.md}
-          colorTheme={colorTheme}
-          jobListings={jobListings}
-          selectedJob={selectedJob}
-          setSelectedJob={setSelectedJob}
-          setFullJobDetails={setFullJobDetails}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      style={{
-        backgroundColor: colorTheme.background,
-        paddingTop: 0,
-        display: "flex",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <LeftComponent
-        colorTheme={colorTheme}
-        jobListings={jobListings}
-        selectedJob={selectedJob}
-        setSelectedJob={setSelectedJob}
-        setFullJobDetails={setFullJobDetails}
-      />
-
-      <RightComponent colorTheme={colorTheme} fullJobDetails={fullJobDetails} />
-    </div>
-  );
-}
-
-export function RightComponent({
-  colorTheme,
-  fullJobDetails,
-}: {
-  colorTheme: colorThemeType;
-  fullJobDetails: JobDetails | null;
-}) {
-  return (
-    <ScrollArea
-      h={"100vh"}
-      offsetScrollbars
-      scrollbarSize={12}
-      scrollHideDelay={0}
-      type="always"
-      style={{ overflow: "hidden" }}
-    >
-      <div style={{ width: "auto" }}>
-        <JobDetailsCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
-        <ExtraDataCard colorTheme={colorTheme} jobDetails={fullJobDetails} />
-      </div>
-    </ScrollArea>
-  );
-}
-
-export function LeftComponent({
-  colorTheme,
-  jobListings,
-  selectedJob,
-  setSelectedJob,
-  setFullJobDetails,
-  isSmall,
-}: {
-  colorTheme: colorThemeType;
-  jobListings: JobDetailsSummary[];
-  selectedJob: JobDetailsSummary;
-  setSelectedJob: React.Dispatch<React.SetStateAction<JobDetailsSummary>>;
-  setFullJobDetails: React.Dispatch<React.SetStateAction<JobDetails | null>>;
-  isSmall?: boolean;
-}) {
-  const CommonComponent = ({ i }: { i: JobDetailsSummary }) => (
-    <JobCard
-      isSmall={isSmall}
-      jobDetails={i}
-      colorTheme={colorTheme}
-      selectedJob={selectedJob}
-      onClickCard={(j: JobDetailsSummary) => {
-        setSelectedJob(j);
-        const _fullJobDetailsQuery = fakeJobData.filter((i) => i.id == j.id);
-        if (_fullJobDetailsQuery.length == 1) {
-          setFullJobDetails(_fullJobDetailsQuery[0]);
-        } else {
-          setFullJobDetails(null);
-        }
-      }}
-    />
-  );
-
-  if (isSmall) {
-    return (
-      <div
-        style={{
-          flexDirection: "column",
-        }}
-      >
-        {jobListings.map((i) => {
-          i.datePosted = new Date(i.datePosted);
-          return <CommonComponent key={i.id} i={i} />;
-        })}
-      </div>
-    );
-  }
-  return (
-    <div
-      style={{
-        flexDirection: "column",
-      }}
-    >
-      <ScrollArea h={"100vh"} type="never">
-        {jobListings.map((i) => {
-          i.datePosted = new Date(i.datePosted);
-          return <CommonComponent key={i.id} i={i} />;
-        })}
-      </ScrollArea>
-    </div>
   );
 }
 

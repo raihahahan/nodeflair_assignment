@@ -1,12 +1,7 @@
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import { JobListings } from "@/features/job_listing/job_listing-components";
 import { JobDetailsSummary } from "@/features/job_listing/job_listing-types";
-import type {
-  InferGetServerSidePropsType,
-  GetServerSideProps,
-  GetStaticProps,
-} from "next";
+import type { GetStaticProps } from "next";
 import { fakeJobData } from "@/features/job_listing/job_listing-data";
 import useTheme from "@/features/theme/theme-hooks";
 
