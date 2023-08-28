@@ -206,7 +206,7 @@ export const fakeJobData: JobDetails[] = [
     location: "Austin, TX",
     datePosted: new Date("2023-08-22"),
     techStacks: ["QA", "Testing", "Selenium"],
-    techJobType: "Quality Assurance",
+    techJobType: "QA",
     salaryRange: {
       currency: "USD",
       min: 75000,
