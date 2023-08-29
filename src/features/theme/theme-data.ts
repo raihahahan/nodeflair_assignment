@@ -6,8 +6,8 @@ import {
 } from "./theme-types";
 
 export const breakpoints: breakpointsTypes = {
-  xs: 500,
-  sm: 850,
+  xs: 413,
+  sm: 426,
   md: 1120,
   lg: 1275,
   xl: 1800,

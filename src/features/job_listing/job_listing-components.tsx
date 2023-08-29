@@ -220,6 +220,7 @@ export function JobCard({
   selectedJob: JobDetailsSummary;
   isSmall?: boolean;
 }) {
+  const { sm, xs } = useGlobalMediaQuery();
   return (
     <Card
       className={styles.container}
@@ -235,13 +236,14 @@ export function JobCard({
         borderWidth: selectedJob.id == jobDetails.id ? 3.5 : 0.2,
         borderColor:
           selectedJob.id == jobDetails.id ? colorTheme.primary.main : "#e1e0dd",
+        minWidth: 314,
       }}
       radius={CARD_BORDER_RADIUS}
     >
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: !sm ? "row" : "column",
         }}
       >
         <Image
