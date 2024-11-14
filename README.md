@@ -1,38 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NodeFlair Jobs Page Replication 🚀
 
-## Getting Started
+This project is a replication of the NodeFlair jobs page, created as part of a take-home assignment. The site is deployed and accessible at:  
+👉 [raihan-nodeflair-takehome.vercel.app](https://raihan-nodeflair-takehome.vercel.app/)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Features 🛠️
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Job Listings:** Displays a list of jobs with relevant details.  
+- **Responsive Design:** Optimized for both desktop and mobile devices.  
+- **Interactive UI:** Built to mimic the look and feel of the NodeFlair jobs page.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Tech Stack 💻
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **Next.js**: Framework for server-side rendering and static site generation.    
+- **Vercel**: Hosting and deployment platform.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+---
 
-## Learn More
+## Running Locally 🏡
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
+- [Node.js](https://nodejs.org/) installed on your machine.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Steps
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/raihahahan/nodeflair_assignment.git
+   cd nodeflair-takehome
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Install dependencies:  
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Run the development server:  
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the site.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## Deployment 🌐
+
+The site is deployed on Vercel. To deploy your own version:  
+1. Install the Vercel CLI:  
+   ```bash
+   npm install -g vercel
+   ```
+
+2. Deploy the app:  
+   ```bash
+   vercel
+   ```
+
+---
